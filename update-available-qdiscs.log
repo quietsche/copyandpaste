@@ -1,0 +1,311 @@
+root@kukuzi:~# /usr/lib/sqm/update-available-qdiscs
+++ . /etc/sqm/sqm.conf
++++ SQM_LIB_DIR=/usr/lib/sqm
++++ SQM_STATE_DIR=/var/run/sqm
++++ SQM_QDISC_STATE_DIR=/var/run/sqm/available_qdiscs
++++ SQM_CHECK_QDISCS='fq_codel efq_codel nfq_codel sfq codel ns2_codel pie sfq cake'
++++ SQM_SYSLOG=1
+++ . /usr/lib/sqm/functions.sh
+++ . /usr/lib/sqm/defaults.sh
++++ '[' -z '' ']'
++++ UPLINK=2302
++++ '[' -z '' ']'
++++ DOWNLINK=14698
++++ '[' -z '' ']'
++++ IFACE=eth0
++++ '[' -z '' ']'
++++ QDISC=fq_codel
++++ '[' -z '' ']'
++++ LLAM=tc_stab
++++ '[' -z '' ']'
++++ LINKLAYER=none
++++ '[' -z '' ']'
++++ OVERHEAD=0
++++ '[' -z '' ']'
++++ STAB_MTU=2047
++++ '[' -z '' ']'
++++ STAB_MPU=0
++++ '[' -z '' ']'
++++ STAB_TSIZE=512
++++ '[' -z '' ']'
++++ AUTOFLOW=0
++++ '[' -z '' ']'
++++ LIMIT=1001
++++ '[' -z '' ']'
++++ ILIMIT=
++++ '[' -z '' ']'
++++ ELIMIT=
++++ '[' -z '' ']'
++++ ITARGET=
++++ '[' -z '' ']'
++++ ETARGET=
++++ '[' -z '' ']'
++++ IECN=ECN
++++ '[' -z '' ']'
++++ EECN=ECN
++++ '[' -z '' ']'
++++ SQUASH_DSCP=1
++++ '[' -z '' ']'
++++ SQUASH_INGRESS=1
++++ '[' -z '' ']'
++++ IQDISC_OPTS=
++++ '[' -z '' ']'
++++ EQDISC_OPTS=
++++ '[' -z '' ']'
++++ TC=tc_wrapper
++++ '[' -z '' ']'
+++++ which tc
++++ TC_BINARY=/usr/sbin/tc
++++ '[' -z '' ']'
++++ IP=ip_wrapper
++++ '[' -z '' ']'
+++++ which ip
++++ IP_BINARY=/usr/sbin/ip
++++ '[' -z '' ']'
+++++ which modprobe
++++ INSMOD=/usr/sbin/modprobe
++++ '[' -z '' ']'
++++ TARGET=5ms
++++ '[' -z '' ']'
++++ IPT_MASK=0xff
++++ '[' -z '' ']'
++++ INGRESS_CAKE_OPTS=diffserv4
++++ '[' -z '' ']'
++++ EGRESS_CAKE_OPTS=diffserv4
++++ VERBOSITY_SILENT=0
++++ VERBOSITY_ERROR=1
++++ VERBOSITY_WARNING=2
++++ VERBOSITY_INFO=5
++++ VERBOSITY_DEBUG=8
++++ VERBOSITY_TRACE=10
++++ '[' -z '' ']'
++++ SQM_VERBOSITY=5
++++ '[' -z '' ']'
++++ SQM_DEBUG=0
++++ '[' 0 == 1 ']'
++++ OUTPUT_TARGET=/dev/null
++++ ALL_SQM_VARS='IFACE UPLINK DOWNLINK SCRIPT ENABLED QDISC LLAM LINKLAYER OVERHEAD STAB_MTU STAB_MPU STAB_TSIZE AUTOFLOW ILIMIT ELIMIT TARGET ITARGET ETARGET IECN EECN SQUASH_DSCP SQUASH_INGRESS IQDISC_OPTS EQDISC_OPTS INGRESS_CAKE_OPTS EGRESS_CAKE_OPTS SQM_DEBUG SQM_DEBUG_LOG OUTPUT_TARGET'
++++ ALL_MODULES='act_ipt sch_fq_codel sch_ingress act_mirred cls_fw cls_flow cls_u32 sch_htb sch_hfsc'
+++ '[' -d /var/run/sqm/available_qdiscs ']'
+++ for qdisc in '$SQM_CHECK_QDISCS'
+++ '[' -f /var/run/sqm/available_qdiscs/fq_codel ']'
+++ continue
+++ for qdisc in '$SQM_CHECK_QDISCS'
+++ '[' -f /var/run/sqm/available_qdiscs/efq_codel ']'
+++ verify_qdisc efq_codel
+++ local qdisc=efq_codel
+++ local supported=
+++ local not=
+++ local ifb=TMP_IFB_4_SQM
+++ local root_string=root
+++ '[' -n '' ']'
+++ create_ifb TMP_IFB_4_SQM
+++ local CUR_IFB=TMP_IFB_4_SQM
+++ ip_wrapper link add name TMP_IFB_4_SQM type ifb
+++ ip_args='link add name TMP_IFB_4_SQM type ifb'
+++ sqm_trace '/usr/sbin/ip link add name TMP_IFB_4_SQM type ifb'
+++ sqm_logger 10 '/usr/sbin/ip link add name TMP_IFB_4_SQM type ifb'
+++ case $1 in
+++ LEVEL=10
+++ shift
+++ '[' 5 -ge 10 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ /usr/sbin/ip link add name TMP_IFB_4_SQM type ifb
+++ ret=0
+++ return 0
+++ case $qdisc in
+++ tc_wrapper qdisc replace dev TMP_IFB_4_SQM root efq_codel
+++ tc_args='qdisc replace dev TMP_IFB_4_SQM root efq_codel'
+++ sqm_trace '/usr/sbin/tc qdisc replace dev TMP_IFB_4_SQM root efq_codel'
+++ sqm_logger 10 '/usr/sbin/tc qdisc replace dev TMP_IFB_4_SQM root efq_codel'
+++ case $1 in
+++ LEVEL=10
+++ shift
+++ '[' 5 -ge 10 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ /usr/sbin/tc qdisc replace dev TMP_IFB_4_SQM root efq_codel
+++ res=2
+++ '[' 2 = 0 ']'
+++ not='NOT '
+++ sqm_debug 'QDISC efq_codel is NOT useable.'
+++ sqm_logger 8 'QDISC efq_codel is NOT useable.'
+++ case $1 in
+++ LEVEL=8
+++ shift
+++ '[' 5 -ge 8 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ delete_ifb TMP_IFB_4_SQM
+++ local CUR_IFB=TMP_IFB_4_SQM
+++ ip_wrapper link set dev TMP_IFB_4_SQM down
+++ ip_args='link set dev TMP_IFB_4_SQM down'
+++ sqm_trace '/usr/sbin/ip link set dev TMP_IFB_4_SQM down'
+++ sqm_logger 10 '/usr/sbin/ip link set dev TMP_IFB_4_SQM down'
+++ case $1 in
+++ LEVEL=10
+++ shift
+++ '[' 5 -ge 10 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ /usr/sbin/ip link set dev TMP_IFB_4_SQM down
+++ ip_wrapper link delete TMP_IFB_4_SQM type ifb
+++ ip_args='link delete TMP_IFB_4_SQM type ifb'
+++ sqm_trace '/usr/sbin/ip link delete TMP_IFB_4_SQM type ifb'
+++ sqm_logger 10 '/usr/sbin/ip link delete TMP_IFB_4_SQM type ifb'
+++ case $1 in
+++ LEVEL=10
+++ shift
+++ '[' 5 -ge 10 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ /usr/sbin/ip link delete TMP_IFB_4_SQM type ifb
+++ return 0
+++ return 2
+++ for qdisc in '$SQM_CHECK_QDISCS'
+++ '[' -f /var/run/sqm/available_qdiscs/nfq_codel ']'
+++ verify_qdisc nfq_codel
+++ local qdisc=nfq_codel
+++ local supported=
+++ local not=
+++ local ifb=TMP_IFB_4_SQM
+++ local root_string=root
+++ '[' -n '' ']'
+++ create_ifb TMP_IFB_4_SQM
+++ local CUR_IFB=TMP_IFB_4_SQM
+++ ip_wrapper link add name TMP_IFB_4_SQM type ifb
+++ ip_args='link add name TMP_IFB_4_SQM type ifb'
+++ sqm_trace '/usr/sbin/ip link add name TMP_IFB_4_SQM type ifb'
+++ sqm_logger 10 '/usr/sbin/ip link add name TMP_IFB_4_SQM type ifb'
+++ case $1 in
+++ LEVEL=10
+++ shift
+++ '[' 5 -ge 10 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ /usr/sbin/ip link add name TMP_IFB_4_SQM type ifb
+++ ret=0
+++ return 0
+++ case $qdisc in
+++ tc_wrapper qdisc replace dev TMP_IFB_4_SQM root nfq_codel
+++ tc_args='qdisc replace dev TMP_IFB_4_SQM root nfq_codel'
+++ sqm_trace '/usr/sbin/tc qdisc replace dev TMP_IFB_4_SQM root nfq_codel'
+++ sqm_logger 10 '/usr/sbin/tc qdisc replace dev TMP_IFB_4_SQM root nfq_codel'
+++ case $1 in
+++ LEVEL=10
+++ shift
+++ '[' 5 -ge 10 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ /usr/sbin/tc qdisc replace dev TMP_IFB_4_SQM root nfq_codel
+++ res=2
+++ '[' 2 = 0 ']'
+++ not='NOT '
+++ sqm_debug 'QDISC nfq_codel is NOT useable.'
+++ sqm_logger 8 'QDISC nfq_codel is NOT useable.'
+++ case $1 in
+++ LEVEL=8
+++ shift
+++ '[' 5 -ge 8 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ delete_ifb TMP_IFB_4_SQM
+++ local CUR_IFB=TMP_IFB_4_SQM
+++ ip_wrapper link set dev TMP_IFB_4_SQM down
+++ ip_args='link set dev TMP_IFB_4_SQM down'
+++ sqm_trace '/usr/sbin/ip link set dev TMP_IFB_4_SQM down'
+++ sqm_logger 10 '/usr/sbin/ip link set dev TMP_IFB_4_SQM down'
+++ case $1 in
+++ LEVEL=10
+++ shift
+++ '[' 5 -ge 10 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ /usr/sbin/ip link set dev TMP_IFB_4_SQM down
+++ ip_wrapper link delete TMP_IFB_4_SQM type ifb
+++ ip_args='link delete TMP_IFB_4_SQM type ifb'
+++ sqm_trace '/usr/sbin/ip link delete TMP_IFB_4_SQM type ifb'
+++ sqm_logger 10 '/usr/sbin/ip link delete TMP_IFB_4_SQM type ifb'
+++ case $1 in
+++ LEVEL=10
+++ shift
+++ '[' 5 -ge 10 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ /usr/sbin/ip link delete TMP_IFB_4_SQM type ifb
+++ return 0
+++ return 2
+++ for qdisc in '$SQM_CHECK_QDISCS'
+++ '[' -f /var/run/sqm/available_qdiscs/sfq ']'
+++ continue
+++ for qdisc in '$SQM_CHECK_QDISCS'
+++ '[' -f /var/run/sqm/available_qdiscs/codel ']'
+++ continue
+++ for qdisc in '$SQM_CHECK_QDISCS'
+++ '[' -f /var/run/sqm/available_qdiscs/ns2_codel ']'
+++ verify_qdisc ns2_codel
+++ local qdisc=ns2_codel
+++ local supported=
+++ local not=
+++ local ifb=TMP_IFB_4_SQM
+++ local root_string=root
+++ '[' -n '' ']'
+++ create_ifb TMP_IFB_4_SQM
+++ local CUR_IFB=TMP_IFB_4_SQM
+++ ip_wrapper link add name TMP_IFB_4_SQM type ifb
+++ ip_args='link add name TMP_IFB_4_SQM type ifb'
+++ sqm_trace '/usr/sbin/ip link add name TMP_IFB_4_SQM type ifb'
+++ sqm_logger 10 '/usr/sbin/ip link add name TMP_IFB_4_SQM type ifb'
+++ case $1 in
+++ LEVEL=10
+++ shift
+++ '[' 5 -ge 10 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ /usr/sbin/ip link add name TMP_IFB_4_SQM type ifb
+++ ret=0
+++ return 0
+++ case $qdisc in
+++ tc_wrapper qdisc replace dev TMP_IFB_4_SQM root ns2_codel
+++ tc_args='qdisc replace dev TMP_IFB_4_SQM root ns2_codel'
+++ sqm_trace '/usr/sbin/tc qdisc replace dev TMP_IFB_4_SQM root ns2_codel'
+++ sqm_logger 10 '/usr/sbin/tc qdisc replace dev TMP_IFB_4_SQM root ns2_codel'
+++ case $1 in
+++ LEVEL=10
+++ shift
+++ '[' 5 -ge 10 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ /usr/sbin/tc qdisc replace dev TMP_IFB_4_SQM root ns2_codel
+++ res=2
+++ '[' 2 = 0 ']'
+++ not='NOT '
+++ sqm_debug 'QDISC ns2_codel is NOT useable.'
+++ sqm_logger 8 'QDISC ns2_codel is NOT useable.'
+++ case $1 in
+++ LEVEL=8
+++ shift
+++ '[' 5 -ge 8 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ delete_ifb TMP_IFB_4_SQM
+++ local CUR_IFB=TMP_IFB_4_SQM
+++ ip_wrapper link set dev TMP_IFB_4_SQM down
+++ ip_args='link set dev TMP_IFB_4_SQM down'
+++ sqm_trace '/usr/sbin/ip link set dev TMP_IFB_4_SQM down'
+++ sqm_logger 10 '/usr/sbin/ip link set dev TMP_IFB_4_SQM down'
+++ case $1 in
+++ LEVEL=10
+++ shift
+++ '[' 5 -ge 10 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ /usr/sbin/ip link set dev TMP_IFB_4_SQM down
+++ ip_wrapper link delete TMP_IFB_4_SQM type ifb
+++ ip_args='link delete TMP_IFB_4_SQM type ifb'
+++ sqm_trace '/usr/sbin/ip link delete TMP_IFB_4_SQM type ifb'
+++ sqm_logger 10 '/usr/sbin/ip link delete TMP_IFB_4_SQM type ifb'
+++ case $1 in
+++ LEVEL=10
+++ shift
+++ '[' 5 -ge 10 ']'
+++ '[' -n 0 -a 0 == 1 ']'
+++ /usr/sbin/ip link delete TMP_IFB_4_SQM type ifb
+++ return 0
+++ return 2
+++ for qdisc in '$SQM_CHECK_QDISCS'
+++ '[' -f /var/run/sqm/available_qdiscs/pie ']'
+++ continue
+++ for qdisc in '$SQM_CHECK_QDISCS'
+++ '[' -f /var/run/sqm/available_qdiscs/sfq ']'
+++ continue
+++ for qdisc in '$SQM_CHECK_QDISCS'
+++ '[' -f /var/run/sqm/available_qdiscs/cake ']'
+++ continue
